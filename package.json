@@ -1,0 +1,14 @@
+{
+  "name": "bookify",
+  "version": "1.0.0",
+  "description": "A simple book app for viewing items on New York Times bestsellers list.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jacolby Green",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.1"
+  }
+}
