@@ -4,7 +4,9 @@
   "description": "A simple book app for viewing items on New York Times bestsellers list.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/app.js",
+    "heroku-postbuild": "cd bookify-ui/ && npm install --only=dev && npm install && npm run build"
   },
   "author": "Jacolby Green",
   "license": "MIT",
