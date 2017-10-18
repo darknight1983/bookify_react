@@ -1,4 +1,5 @@
 import React from 'react'
+import Book from './book'
 
 class App extends React.Component {
   constructor() {
@@ -7,7 +8,7 @@ class App extends React.Component {
       books: []
     }
   }
-
+// Using fetch API to request json from googleapis
   handleClick(e) {
     if (e.keyCode === 13) {
       let query = e.target.value;
@@ -21,7 +22,7 @@ class App extends React.Component {
         }).then((booksArray) => {
           console.log(booksArray.items);
           console.log(this)
-          this.setState({books: booksArray});
+          this.setState({books: booksArray.items});
         }).catch((error) => {
           console.error(error);
         })
@@ -30,11 +31,18 @@ class App extends React.Component {
   }
   render() {
     return (
-      <header>
-        <h1>Bookify</h1>
-        <input type="text" onKeyUp={this.handleClick.bind(this)} />
-      </header>
-
+      <div>
+        <header className="header">
+          <h1 className="siteName">Bookify</h1>
+          {/* Binding handleClick to instances of App. */}
+          <input className="author_query" type="text" onKeyUp={this.handleClick.bind(this)} />
+        </header>
+        <section>
+          {this.state.books.map(function(book, i) {
+            return <Book title={book.volumeInfo.title} key={i}/>
+          })}
+        </section>
+      </div>
     )
   }
 }
