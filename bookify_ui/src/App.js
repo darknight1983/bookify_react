@@ -36,6 +36,13 @@ class App extends React.Component {
           <h1 className="siteName">Bookify</h1>
           {/* Binding handleClick to instances of App. */}
           <input className="author_query" type="text" onKeyUp={this.handleClick.bind(this)} />
+          <nav>
+            <ul>
+              <li><a href="/auth/logout">Logout</a></li>
+              <li><a href="/auth/login">Login</a></li>
+              <li><a href="/home"></a>Home</li>
+            </ul>
+          </nav>
         </header>
         <section>
           {this.state.books.map(function(book, i) {
