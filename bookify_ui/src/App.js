@@ -1,5 +1,6 @@
 import React from 'react'
 import Book from './book'
+import { Link } from 'react-router-dom';
 
 class App extends React.Component {
   constructor() {
@@ -37,19 +38,27 @@ class App extends React.Component {
             <img className="header__logo" src="../images/city.png" alt="iconic view of a cityscape" />
             <h1 className="header__title">Bookify</h1>
             {/* Binding handleClick to instances of App. */}
-            <input className="author_query" type="text" onKeyUp={this.handleClick.bind(this)} />
+            <div className="query__container">
+              <input className="author_query" type="text" size="32" onKeyUp={this.handleClick.bind(this)} />
+            </div>
           </div>
         </header>
         <nav className="nav">
           <ul className="nav__list">
-            <li className="nav__item"><a href="/auth/logout">Logout</a></li>
+            <li className="nav__item" ><Link to="/register">Register</Link></li>
             <li className="nav__item"><a href="/auth/login">Login</a></li>
-            <li className="nav__item" ><a href="/home"></a>Home</li>
+            <li className="nav__item"><a href="/auth/logout">Logout</a></li>
           </ul>
         </nav>
         <main>
           {this.state.books.map(function(book, i) {
-            return <Book title={book.volumeInfo.title} key={i}/>
+            return <Book title={book.volumeInfo.title}
+                         key={i}
+                         authors={book.volumeInfo.authors}
+                         description={book.volumeInfo.description}
+                         image={book.volumeInfo.imageLinks.smallThumbnail}
+                         />
+
           })}
         </main>
       </div>
