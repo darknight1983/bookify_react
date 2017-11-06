@@ -1,6 +1,8 @@
-import React from 'react'
-import Book from './book'
-import { Link } from 'react-router-dom';
+import React from 'react';
+import Book from './components/book';
+import RegisterForm from './components/register';
+import Login from './components/login';
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
 class App extends React.Component {
   constructor() {
@@ -32,36 +34,40 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div>
-        <header className="header">
-          <div className="header__inner">
-            <img className="header__logo" src="../images/city.png" alt="iconic view of a cityscape" />
-            <h1 className="header__title">Bookify</h1>
-            {/* Binding handleClick to instances of App. */}
-            <div className="query__container">
-              <input className="author_query" type="text" size="32" onKeyUp={this.handleClick.bind(this)} />
-            </div>
-          </div>
-        </header>
-        <nav className="nav">
-          <ul className="nav__list">
-            <li className="nav__item" ><Link to="/register">Register</Link></li>
-            <li className="nav__item"><a href="/auth/login">Login</a></li>
-            <li className="nav__item"><a href="/auth/logout">Logout</a></li>
-          </ul>
-        </nav>
-        <main>
-          {this.state.books.map(function(book, i) {
-            return <Book title={book.volumeInfo.title}
-                         key={i}
-                         authors={book.volumeInfo.authors}
-                         description={book.volumeInfo.description}
-                         image={book.volumeInfo.imageLinks.smallThumbnail}
-                         />
+      <Router>
+          <div>
+            <header className="header">
+              <div className="header__inner">
+                <img className="header__logo" src="../images/city.png" alt="iconic view of a cityscape" />
+                <h1 className="header__title">Bookify</h1>
+                {/* Binding handleClick to instances of App. */}
+                <div className="query__container">
+                  <input className="author_query" type="text" size="32" onKeyUp={this.handleClick.bind(this)} />
+                </div>
+              </div>
+            </header>
+            <nav className="nav">
+              <ul className="nav__list">
+                <li className="nav__item" ><Link to="/register">Register</Link></li>
+                <li className="nav__item"><Link to="/login">Login</Link></li>
+                <li className="nav__item"><a href="/auth/logout">Logout</a></li>
+              </ul>
+            </nav>
+            <main>
+              <Route path="/register" component={RegisterForm}/>
+              <Route path="/login" component={Login}/>
+              {this.state.books.map(function(book, i) {
+                return <Book title={book.volumeInfo.title}
+                             key={i}
+                             authors={book.volumeInfo.authors}
+                             description={book.volumeInfo.description}
+                             image={book.volumeInfo.imageLinks.smallThumbnail}
+                             />
 
-          })}
-        </main>
-      </div>
+              })}
+            </main>
+          </div>
+      </Router>
     )
   }
 }

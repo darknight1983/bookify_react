@@ -14,6 +14,11 @@ app.get('/api', function(req, res) {
   res.send({message: 'Custom API ready for building'});
 });
 
+// This is a test post request to make sure the register form works.
+app.post('/register', function(req, res) {
+  console.log(req.body);
+});
+
 app.get('*', function(request, response) {
   response.sendFile(path.resolve(__dirname, '../bookify-ui/build', 'index.html'));
 });
